@@ -7,7 +7,7 @@ const heroesAdpater = createEntityAdapter()
 const initialState = heroesAdpater.getInitialState({
     heoresLoadingStatus: 'idle'
 });
-
+console.log(initialState);
 export const fetchHeroes = createAsyncThunk(
     'heroes/fetchHeroes',
     async () => {
@@ -39,17 +39,19 @@ const heroesSlice = createSlice({
         })
         .addDefaultCase(() => {})
     }
+    
 });
 
 const {actions, reducer} = heroesSlice;
-const {selectAll} = heroesAdpater.getSelectors(state => state.heroes)
+export const {selectAll} = heroesAdpater.getSelectors(state => state.heroes)
 
 export default reducer
 
 export const filteredHeroesSelector = createSelector(
-    (state) => state.filters.activeFilter,
+    // (state) => state.filters.activeFilter,
     selectAll,
-    (filter, heroes) => {
+    ( heroes) => {
+        const filter = 'all'
         if (filter === 'all') {
             return heroes;
         } else {
@@ -64,5 +66,6 @@ export const {
     heroesFetched,
     heroesFetchingError,
     heroCreated,
-    heroDeleted
+    heroDeleted,
+    
 } = actions;
