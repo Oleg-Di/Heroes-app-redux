@@ -48,10 +48,10 @@ export const {selectAll} = heroesAdpater.getSelectors(state => state.heroes)
 export default reducer
 
 export const filteredHeroesSelector = createSelector(
-    // (state) => state.filters.activeFilter,
+    (state) => state.filters.activeFilter,
     selectAll,
-    ( heroes) => {
-        const filter = 'all'
+    (filter, heroes) => {
+
         if (filter === 'all') {
             return heroes;
         } else {
